@@ -1,0 +1,2 @@
+hi this is my word count function
+which i am dont know how it'll work
