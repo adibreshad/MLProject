@@ -46,13 +46,40 @@ class ModelTrainer:
                 # "XGB Regressor": XGBRegressor(),  # COMMENTED OUT
                 "CatBoost Regressor": CatBoostRegressor(verbose=False),
             }
+            params = {
+                "Decision Tree": {
+                    'criterion': ['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                },
+                "Random Forest": {
+                    'n_estimators': [8, 16, 32, 64, 128, 256],
+                },
+                "Gradient Boosting": {
+                    'learning_rate': [.1, .01, .05, .001],
+                    'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
+                    'n_estimators': [8, 16, 32, 64, 128, 256],
+                },
+                "Linear Regression": {},
+                "K Neighbors": {  # Fixed key to match models dict
+                    'n_neighbors': [5, 7, 9, 11],
+                },
+                "CatBoost Regressor": {
+                    'depth': [6, 8, 10],
+                    'learning_rate': [0.1, 0.01, 0.05, 0.001],
+                    'iterations': [100, 200, 300],
+                },
+                "Adaboost Regressor": {
+                    'learning_rate': [.1, 0.01, 0.05, 0.001],  # Fixed typo
+                    'n_estimators': [8, 16, 32, 64, 128, 256],
+                }
+            }
             
             model_report: dict = evaluate_model(
                 X_train=X_train,
                 y_train=y_train,
                 X_test=X_test,
                 y_test=y_test,
-                models=models
+                models=models,
+                params=params,
             )
 
             ## to get best model score from dict
