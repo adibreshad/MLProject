@@ -1,8 +1,7 @@
 
 matplotlib
 seaborn
-catboost
-xgboost
+
 
 # -e .
 flask==2.3.2
